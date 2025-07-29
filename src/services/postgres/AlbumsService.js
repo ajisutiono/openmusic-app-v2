@@ -3,7 +3,7 @@ const { Pool } = require('pg');
 const InvariantError = require('../../exceptions/InvariantError');
 const NotFoundError = require('../../exceptions/NotFoundError');
 
-class AlbumesService {
+class AlbumsService {
   constructor() {
     this._pool = new Pool();
   }
@@ -67,5 +67,5 @@ class AlbumesService {
   }
 }
 
-module.exports = AlbumesService;
+module.exports = AlbumsService;
 
