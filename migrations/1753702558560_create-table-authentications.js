@@ -8,7 +8,6 @@ module.exports = {
       token: {
         type: 'TEXT',
         notNull: true,
-        primaryKey: true,
       },
     });
   },
