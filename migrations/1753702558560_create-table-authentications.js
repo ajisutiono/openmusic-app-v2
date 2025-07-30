@@ -3,13 +3,12 @@
  */
 
 module.exports = {
-  shorthands: undefined,
-
   up(pgm) {
     pgm.createTable('authentications', {
       token: {
         type: 'TEXT',
         notNull: true,
+        primaryKey: true,
       },
     });
   },

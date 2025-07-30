@@ -1,6 +1,8 @@
 const { Pool } = require('pg');
 const { nanoid } = require('nanoid');
 const InvariantError = require('../../exceptions/InvariantError');
+const NotFoundError = require('../../exceptions/NotFoundError');
+const AuthorizationError = require('../../exceptions/AuthorizationError');
 
 class CollaborationsService {
   constructor() {
@@ -8,6 +10,15 @@ class CollaborationsService {
   }
 
   async addCollaboration(playlistId, userId) {
+    // Pastikan userId valid
+    const userCheckQuery = {
+      text: 'SELECT id FROM users WHERE id = $1',
+      values: [userId],
+    };
+    const userCheckResult = await this._pool.query(userCheckQuery);
+    if (!userCheckResult.rows.length) {
+      throw new NotFoundError('User tidak ditemukan');
+    }
     const id = `collab-${nanoid(16)}`;
 
     const query = {
@@ -46,7 +57,8 @@ class CollaborationsService {
     const result = await this._pool.query(query);
 
     if (!result.rows.length) {
-      throw new InvariantError('Kolaborasi gagal diverifikasi');
+      // throw new InvariantError('Kolaborasi gagal diverifikasi');
+      throw new AuthorizationError('Anda tidak berhak mengakses resource ini');
     }
   }
 }

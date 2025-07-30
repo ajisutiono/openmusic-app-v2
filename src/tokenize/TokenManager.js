@@ -8,12 +8,12 @@ const TokenManager = {
     try {
       const artifacts = Jwt.token.decode(refreshToken);
       Jwt.token.verifySignature(artifacts, process.env.REFRESH_TOKEN_KEY);
-      const { payload } = artifacts.decode;
-      return payload;
+      return artifacts.decoded.payload;
     } catch {
       throw new InvariantError('Refresh token tidak valid');
     }
   },
+
 };
 
 module.exports = TokenManager;

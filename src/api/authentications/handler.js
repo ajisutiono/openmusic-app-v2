@@ -43,7 +43,7 @@ class AuthenticationsHandler {
     const accessToken = this._tokenManager.generateAccessToken({ id });
     return {
       status: 'success',
-      message: 'Access Token berhasil diperbarui',
+      message: 'Access token berhasil diperbarui',
       data: {
         accessToken,
       },
@@ -62,6 +62,7 @@ class AuthenticationsHandler {
       message: 'Refresh token berhasil dihapus',
     };
   }
+
 }
 
 module.exports = AuthenticationsHandler;
